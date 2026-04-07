@@ -1,6 +1,9 @@
 (function () {
   'use strict';
 
+  // Shared state for easter egg access
+  const neuralState = { particles: null, converging: false, W: 0, H: 0 };
+
   // ─── NEURAL NETWORK PARTICLE CANVAS ───
   function initNeuralCanvas() {
     const canvas = document.getElementById('neuralCanvas');
@@ -33,6 +36,9 @@
           pulse: Math.random() * Math.PI * 2,
         });
       }
+      neuralState.particles = particles;
+      neuralState.W = W;
+      neuralState.H = H;
     }
 
     function draw() {
@@ -41,19 +47,33 @@
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        // Mouse interaction
-        const dx = mouse.x - p.x;
-        const dy = mouse.y - p.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < MOUSE_RADIUS) {
-          const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * MOUSE_FORCE;
-          p.vx += dx * force;
-          p.vy += dy * force;
+        // Convergence mode (easter egg)
+        if (neuralState.converging) {
+          const cx = W / 2;
+          const cy = H / 2;
+          const cdx = cx - p.x;
+          const cdy = cy - p.y;
+          const cdist = Math.sqrt(cdx * cdx + cdy * cdy);
+          const pullForce = 0.04 + (1 - Math.min(cdist / 400, 1)) * 0.06;
+          p.vx += cdx * pullForce;
+          p.vy += cdy * pullForce;
+          p.vx *= 0.88;
+          p.vy *= 0.88;
+        } else {
+          // Mouse interaction
+          const dx = mouse.x - p.x;
+          const dy = mouse.y - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < MOUSE_RADIUS) {
+            const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * MOUSE_FORCE;
+            p.vx += dx * force;
+            p.vy += dy * force;
+          }
         }
 
         // Friction
-        p.vx *= 0.98;
-        p.vy *= 0.98;
+        p.vx *= neuralState.converging ? 0.92 : 0.98;
+        p.vy *= neuralState.converging ? 0.92 : 0.98;
 
         p.x += p.vx;
         p.y += p.vy;
@@ -114,6 +134,8 @@
     window.addEventListener('resize', () => {
       resize();
       createParticles();
+      neuralState.W = W;
+      neuralState.H = H;
     });
 
     const hero = document.querySelector('.hero');
@@ -366,6 +388,118 @@
     requestAnimationFrame(update);
   }
 
+  // ─── EASTER EGG: type "gradient" anywhere ───
+  function initEasterEgg() {
+    const SECRET = 'gradient';
+    let buffer = '';
+    let active = false;
+
+    const TRAINING_LOG = [
+      { text: '$ python gradient_descent.py', cls: 'ee-green' },
+      { text: '', cls: '' },
+      { text: '>>> Initializing neural network...', cls: 'ee-dim' },
+      { text: '>>> Loading weights from kartikeya/brain-v3.2', cls: 'ee-dim' },
+      { text: '', cls: '' },
+      { text: '<span class="ee-dim">[Epoch 1/100]</span> loss: <span class="ee-red">0.847</span> lr: 3e-4', cls: '' },
+      { text: '<span class="ee-dim">[Epoch 12/100]</span> loss: <span class="ee-yellow">0.391</span> lr: 2.1e-4', cls: '' },
+      { text: '<span class="ee-dim">[Epoch 47/100]</span> loss: <span class="ee-yellow">0.084</span> lr: 8e-5', cls: '' },
+      { text: '<span class="ee-dim">[Epoch 89/100]</span> loss: <span class="ee-green">0.023</span> lr: 1e-5 <span class="ee-green">&#10003;</span>', cls: '' },
+      { text: '', cls: '' },
+      { text: '>>> Model converged. Evaluating metrics...', cls: 'ee-dim' },
+      { text: '', cls: '' },
+      { text: '<span class="ee-accent">[PrismV6]</span>     approval_rate  <span class="ee-green">+= 150bps</span>', cls: '' },
+      { text: '<span class="ee-accent">[LLaMA-3]</span>     QLoRA fine-tune <span class="ee-green">complete</span>  TAT <span class="ee-green">-24h</span>', cls: '' },
+      { text: '<span class="ee-accent">[Spade-RT]</span>    p99_latency    <span class="ee-green">&lt;25ms</span> @ 10K rps', cls: '' },
+      { text: '<span class="ee-accent">[FeatureStore]</span> consistency    <span class="ee-green">99.99%</span>', cls: '' },
+      { text: '<span class="ee-accent">[AWS]</span>          monthly_cost   <span class="ee-green">-$18,000</span>', cls: '' },
+      { text: '', cls: '' },
+      { text: '<span class="ee-white">>>> All metrics converged. Global minimum reached.</span>', cls: 'ee-line--result' },
+      { text: '<span class="ee-dim">>>></span> <span class="ee-white">Kartikeya was here.</span> <span class="ee-cursor-blink">_</span>', cls: '' },
+    ];
+
+    function showOverlay() {
+      const overlay = document.getElementById('eeOverlay');
+      const body = document.getElementById('eeTerminalBody');
+      if (!overlay || !body) return;
+
+      active = true;
+      body.innerHTML = '';
+      overlay.classList.add('active');
+
+      // Converge particles
+      neuralState.converging = true;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Type out training log line by line
+      TRAINING_LOG.forEach((line, i) => {
+        setTimeout(() => {
+          const div = document.createElement('div');
+          div.className = 'ee-line' + (line.cls ? ' ' + line.cls : '');
+          div.style.animationDelay = '0s';
+          if (line.text === '') {
+            div.innerHTML = '&nbsp;';
+          } else {
+            div.innerHTML = line.text;
+          }
+          body.appendChild(div);
+          body.scrollTop = body.scrollHeight;
+        }, 400 + i * 220);
+      });
+
+      // Auto-dismiss after log finishes
+      const totalTime = 400 + TRAINING_LOG.length * 220 + 4000;
+      setTimeout(() => dismiss(), totalTime);
+    }
+
+    function dismiss() {
+      const overlay = document.getElementById('eeOverlay');
+      if (overlay) overlay.classList.remove('active');
+
+      // Explode particles outward
+      if (neuralState.particles) {
+        const cx = neuralState.W / 2;
+        const cy = neuralState.H / 2;
+        neuralState.particles.forEach((p) => {
+          const angle = Math.atan2(p.y - cy, p.x - cx);
+          const speed = 4 + Math.random() * 6;
+          p.vx = Math.cos(angle) * speed;
+          p.vy = Math.sin(angle) * speed;
+        });
+      }
+
+      neuralState.converging = false;
+      setTimeout(() => { active = false; }, 600);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (active) {
+        if (e.key === 'Escape') dismiss();
+        return;
+      }
+
+      // Don't capture if user is typing in an input
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      buffer += e.key.toLowerCase();
+      if (buffer.length > SECRET.length) {
+        buffer = buffer.slice(-SECRET.length);
+      }
+
+      if (buffer === SECRET) {
+        buffer = '';
+        showOverlay();
+      }
+    });
+  }
+
+  // ─── CONSOLE GREETING ───
+  function initConsoleGreeting() {
+    const style = 'color: #818cf8; font-size: 14px; font-weight: bold;';
+    const styleDim = 'color: #71717a; font-size: 12px;';
+    console.log('%cHey there, curious one. 👀', style);
+    console.log('%cTry typing "gradient" anywhere on the page.', styleDim);
+  }
+
   // ─── INIT ───
   document.addEventListener('DOMContentLoaded', () => {
     initNeuralCanvas();
@@ -378,5 +512,7 @@
     initTiltCards();
     initMagnetic();
     initCounters();
+    initEasterEgg();
+    initConsoleGreeting();
   });
 })();

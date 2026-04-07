@@ -567,14 +567,18 @@ button { cursor: none; }
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
-.stat { display: flex; flex-direction: column; gap: 4px; text-align: center; }
+.stat { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+.stat__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
 .stat__value {
   font-family: var(--font-heading);
   font-size: 1.75rem;
   font-weight: 700;
   color: var(--white);
   line-height: 1;
-  display: inline;
 }
 .stat__label {
   font-size: 0.75rem;
@@ -1015,6 +1019,107 @@ button { cursor: none; }
   border-top: 1px solid var(--border);
 }
 .footer p { font-size: 0.8125rem; color: var(--text-dim); }
+
+/* ================================================
+   EASTER EGG OVERLAY
+   ================================================ */
+.ee-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 5, 5, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s var(--ease-out), visibility 0.6s;
+  cursor: auto;
+}
+.ee-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.ee-terminal {
+  width: min(640px, 90vw);
+  border-radius: 12px;
+  border: 1px solid rgba(129, 140, 248, 0.2);
+  background: rgba(10, 10, 14, 0.95);
+  box-shadow:
+    0 0 80px rgba(129, 140, 248, 0.1),
+    0 24px 80px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  transform: scale(0.92) translateY(20px);
+  transition: transform 0.5s var(--ease-spring);
+}
+.ee-overlay.active .ee-terminal {
+  transform: scale(1) translateY(0);
+}
+
+.ee-terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.ee-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.ee-dot--red { background: #ff5f57; }
+.ee-dot--yellow { background: #febc2e; }
+.ee-dot--green { background: #28c840; }
+.ee-terminal-title {
+  margin-left: 8px;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.ee-terminal-body {
+  padding: 20px 24px;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.8125rem;
+  line-height: 1.9;
+  color: var(--text-muted);
+  min-height: 280px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+.ee-terminal-body::-webkit-scrollbar { width: 4px; }
+.ee-terminal-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.ee-line {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: eeLine 0.3s var(--ease-out) forwards;
+}
+@keyframes eeLine {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ee-line .ee-dim { color: var(--text-dim); }
+.ee-line .ee-accent { color: var(--accent-bright); }
+.ee-line .ee-green { color: #34d399; }
+.ee-line .ee-yellow { color: #fbbf24; }
+.ee-line .ee-red { color: #f87171; }
+.ee-line .ee-white { color: var(--white); font-weight: 600; }
+
+.ee-line--result {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ee-line .ee-cursor-blink {
+  animation: blink 1s step-end infinite;
+}
 
 /* ================================================
    3D TILT CARD
