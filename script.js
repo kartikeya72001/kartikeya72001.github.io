@@ -455,20 +455,32 @@
       const overlay = document.getElementById('eeOverlay');
       if (overlay) overlay.classList.remove('active');
 
-      // Explode particles outward
+      neuralState.converging = false;
+
+      // Explode particles outward with random angles and scatter to random positions
       if (neuralState.particles) {
-        const cx = neuralState.W / 2;
-        const cy = neuralState.H / 2;
+        const W = neuralState.W;
+        const H = neuralState.H;
+
         neuralState.particles.forEach((p) => {
-          const angle = Math.atan2(p.y - cy, p.x - cx);
-          const speed = 4 + Math.random() * 6;
+          const angle = Math.random() * Math.PI * 2;
+          const speed = 6 + Math.random() * 10;
           p.vx = Math.cos(angle) * speed;
           p.vy = Math.sin(angle) * speed;
         });
+
+        // After the burst settles, scatter them to random positions like the initial state
+        setTimeout(() => {
+          neuralState.particles.forEach((p) => {
+            p.x = Math.random() * W;
+            p.y = Math.random() * H;
+            p.vx = (Math.random() - 0.5) * 0.6;
+            p.vy = (Math.random() - 0.5) * 0.6;
+          });
+        }, 800);
       }
 
-      neuralState.converging = false;
-      setTimeout(() => { active = false; }, 600);
+      setTimeout(() => { active = false; }, 1000);
     }
 
     // Desktop: type "gradient"
