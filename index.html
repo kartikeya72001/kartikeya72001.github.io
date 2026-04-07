@@ -7,25 +7,28 @@
   <meta name="description" content="Machine Learning Engineer building production ML systems, GenAI applications, and MLOps infrastructure at scale.">
   <meta name="keywords" content="Kartikeya Agarwal, Machine Learning Engineer, GenAI, MLOps, LLM, Navi Technologies">
   <meta name="author" content="Kartikeya Agarwal">
-
   <meta property="og:title" content="Kartikeya Agarwal — ML Engineer">
   <meta property="og:description" content="Building production ML systems, GenAI applications, and MLOps infrastructure at scale.">
   <meta property="og:type" content="website">
-
   <link rel="icon" href="favicon.png" type="image/png">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+  <!-- ===== CUSTOM CURSOR ===== -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
   <!-- ===== NAV ===== -->
   <nav class="nav" id="nav">
     <div class="nav__inner">
-      <a href="#hero" class="nav__logo">KA</a>
+      <a href="#hero" class="nav__logo">
+        <span class="nav__logo-text">KA</span>
+        <span class="nav__logo-dot"></span>
+      </a>
       <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
       </button>
@@ -42,28 +45,44 @@
 
   <!-- ===== HERO ===== -->
   <section class="hero" id="hero">
-    <div class="hero__glow" id="heroGlow"></div>
+    <canvas class="hero__canvas" id="neuralCanvas"></canvas>
+    <div class="hero__gradient"></div>
     <div class="hero__noise"></div>
+
     <div class="hero__content">
-      <p class="hero__greeting reveal">Hi, I'm</p>
-      <h1 class="hero__name reveal">Kartikeya Agarwal</h1>
+      <div class="hero__badge reveal">
+        <span class="hero__badge-dot"></span>
+        Available for opportunities
+      </div>
+      <h1 class="hero__name reveal">
+        <span class="hero__name-line">Kartikeya</span>
+        <span class="hero__name-line hero__name-line--accent">Agarwal</span>
+      </h1>
       <div class="hero__roles reveal">
         <span class="hero__typed" id="typedTarget"></span><span class="hero__cursor">|</span>
       </div>
       <p class="hero__summary reveal">
-        Building production ML systems, GenAI applications, and&nbsp;MLOps infrastructure that move the needle at scale.
+        I build production ML systems that serve <span class="hero__highlight">10K+ RPS at &lt;25ms</span>,
+        fine-tune LLMs that unlock <span class="hero__highlight">INR 15Cr monthly</span>,
+        and optimize infrastructure saving <span class="hero__highlight">$18K/month</span>.
       </p>
       <div class="hero__actions reveal">
-        <a href="KartikeyasResume.pdf" target="_blank" class="btn btn--primary">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Resume
+        <a href="KartikeyasResume.pdf" target="_blank" class="btn btn--primary magnetic">
+          <span class="btn__text">Download Resume</span>
+          <span class="btn__icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </span>
         </a>
-        <a href="#contact" class="btn btn--outline">Get in touch</a>
+        <a href="#contact" class="btn btn--outline magnetic">
+          <span class="btn__text">Get in touch</span>
+        </a>
       </div>
     </div>
-    <div class="hero__scroll reveal">
-      <span>Scroll</span>
-      <div class="hero__scroll-line"></div>
+
+    <div class="hero__scroll-indicator reveal">
+      <div class="hero__mouse">
+        <div class="hero__mouse-wheel"></div>
+      </div>
     </div>
   </section>
 
@@ -77,38 +96,43 @@
       </div>
       <div class="about__grid">
         <div class="about__photo reveal">
-          <div class="about__photo-frame">
+          <div class="about__photo-frame tilt-card">
             <img src="assets/profile.png" alt="Kartikeya Agarwal" loading="lazy">
             <div class="about__photo-border"></div>
+            <div class="about__photo-glow"></div>
           </div>
         </div>
-        <div class="about__content reveal">
-          <p class="about__text">
+        <div class="about__content">
+          <p class="about__text reveal">
             Machine Learning Engineer with <strong>3+ years</strong> of experience building production ML systems at
-            <strong>Navi Technologies</strong>. I work across the full ML lifecycle — from fine-tuning LLMs for
+            <strong>Navi Technologies</strong>. I work across the full ML lifecycle &mdash; from fine-tuning LLMs for
             SMS entity recognition to developing credit risk models that improved approval rates by 150bps.
           </p>
-          <p class="about__text">
+          <p class="about__text reveal">
             I'm driven by optimizing systems and processes: reducing model training costs by 31%,
             saving up to $18,000 monthly through AWS resource optimization, and architecting real-time
             feature serving at sub-25ms p99 latency. Currently focused on MLOps infrastructure and
             GenAI applications in financial services.
           </p>
-          <div class="about__stats">
+          <div class="about__stats reveal">
             <div class="stat">
-              <span class="stat__value">3+</span>
+              <span class="stat__value counter" data-target="3">0</span><span class="stat__value">+</span>
               <span class="stat__label">Years Experience</span>
             </div>
             <div class="stat">
-              <span class="stat__value">2</span>
+              <span class="stat__value counter" data-target="2">0</span>
               <span class="stat__label">Published Papers</span>
             </div>
             <div class="stat">
-              <span class="stat__value">$300K+</span>
-              <span class="stat__label">AWS Savings</span>
+              <span class="stat__value">$</span><span class="stat__value counter" data-target="300">0</span><span class="stat__value">K+</span>
+              <span class="stat__label">Infra Savings</span>
+            </div>
+            <div class="stat">
+              <span class="stat__value counter" data-target="150">0</span><span class="stat__value">bps</span>
+              <span class="stat__label">Approval Uplift</span>
             </div>
           </div>
-          <div class="about__tags">
+          <div class="about__tags reveal">
             <span class="tag">Python</span>
             <span class="tag">PyTorch</span>
             <span class="tag">LLMs</span>
@@ -137,83 +161,120 @@
       </div>
 
       <div class="exp__company reveal">
-        <div class="exp__company-header">
-          <h3 class="exp__company-name">Navi Technologies</h3>
-          <span class="exp__company-meta">Machine Learning Engineer &middot; July 2023 &ndash; Present &middot; Bangalore</span>
+        <h3 class="exp__company-name">Navi Technologies</h3>
+        <span class="exp__company-meta">Machine Learning Engineer &middot; July 2023 &ndash; Present &middot; Bangalore</span>
+      </div>
+
+      <!-- GenAI - Featured -->
+      <div class="exp__featured reveal">
+        <div class="exp__featured-label">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Featured Work
+        </div>
+        <div class="exp__featured-card tilt-card">
+          <div class="exp__featured-glow"></div>
+          <div class="exp__featured-content">
+            <div class="exp__featured-header">
+              <h4 class="exp__featured-title">GenAI &amp; LLM Engineering</h4>
+              <div class="exp__featured-tags">
+                <span>LLaMA 3</span><span>Mistral 7B</span><span>QLoRA</span><span>BiLSTM-CRF</span>
+              </div>
+            </div>
+            <div class="exp__featured-body">
+              <div class="exp__featured-item">
+                <h5>LLM Fine-Tuning for SMS Entity Recognition</h5>
+                <p>Proposed and implemented parameter-efficient fine-tuning of Mistral 7B and LLaMA 3 8B using QLoRA for SMS entity recognition. Distilled into BiLSTM-CRF with BIO tagging to solve production latency constraints. Eliminated manual tagging dependency and reduced turnaround by 24 hours.</p>
+              </div>
+              <div class="exp__featured-item">
+                <h5>Multi-Agent LLM Underwriting Engine</h5>
+                <p>Built an end-to-end guided re-verification platform for rejected loan applicants. Integrated in-house ITR &amp; GST parser with a multi-agent LLM engine and multi-lingual chatbot. Orchestrated a dynamic 3-5 model ensemble generating 150+ features.</p>
+              </div>
+            </div>
+            <div class="exp__featured-metrics">
+              <div class="exp__metric-card">
+                <span class="exp__metric-value">+36 bps</span>
+                <span class="exp__metric-label">Approval Rate</span>
+              </div>
+              <div class="exp__metric-card">
+                <span class="exp__metric-value">INR 15Cr</span>
+                <span class="exp__metric-label">Monthly Disbursal</span>
+              </div>
+              <div class="exp__metric-card">
+                <span class="exp__metric-value">24h</span>
+                <span class="exp__metric-label">TAT Reduction</span>
+              </div>
+              <div class="exp__metric-card">
+                <span class="exp__metric-value">150+</span>
+                <span class="exp__metric-label">Features Generated</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
+      <!-- Two-column experience cards -->
       <div class="exp__grid">
-
-        <!-- GenAI -->
-        <article class="exp__card reveal">
-          <div class="exp__card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 0-4 4c0 2 1 3 2 4l-1 1a2 2 0 0 0 0 3h6a2 2 0 0 0 0-3l-1-1c1-1 2-2 2-4a4 4 0 0 0-4-4z"/><path d="M12 14v8"/><path d="M8 22h8"/></svg>
-          </div>
-          <h4 class="exp__card-title">GenAI</h4>
-          <p class="exp__card-desc">
-            Fine-tuned LLaMA 3 8B and Mistral 7B for SMS entity recognition using QLoRA, then distilled
-            into BiLSTM-CRF for production latency. Built a multi-agent LLM underwriting engine with
-            multi-lingual chatbot, achieving +36bps approval uplift and INR 10-15Cr monthly disbursal increase.
-          </p>
-          <div class="exp__metrics">
-            <div class="metric">
-              <span class="metric__value">+36 bps</span>
-              <span class="metric__label">Approval Uplift</span>
+        <article class="exp__card tilt-card reveal">
+          <div class="exp__card-accent"></div>
+          <div class="exp__card-content">
+            <div class="exp__card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
             </div>
-            <div class="metric">
-              <span class="metric__value">24h</span>
-              <span class="metric__label">TAT Reduction</span>
+            <h4 class="exp__card-title">Credit Risk Modeling</h4>
+            <p class="exp__card-desc">Replaced XGBoost with CatBoost for PrismV6 risk model, engineering new features for a direct 150bps approval rate increase. Built income models using XGBoost + LightGBM improving accuracy within 10% by 6 points.</p>
+            <div class="exp__card-bullets">
+              <div class="exp__bullet"><span class="exp__bullet-value">+150 bps</span> Approval Rate Increase</div>
+              <div class="exp__bullet"><span class="exp__bullet-value">46%</span> Retraining Time Reduction</div>
+              <div class="exp__bullet"><span class="exp__bullet-value">31%</span> Cost Reduction</div>
             </div>
           </div>
         </article>
 
-        <!-- Credit Underwriting -->
-        <article class="exp__card reveal">
-          <div class="exp__card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-          </div>
-          <h4 class="exp__card-title">Credit Underwriting</h4>
-          <p class="exp__card-desc">
-            Replaced XGBoost with CatBoost for the PrismV6 risk model, engineering new features for a direct
-            150bps approval rate increase. Built income models using XGBoost + LightGBM, improving accuracy
-            within 10% by 6 points. Optimized retraining pipelines for 46% time and 31% cost reduction.
-          </p>
-          <div class="exp__metrics">
-            <div class="metric">
-              <span class="metric__value">+150 bps</span>
-              <span class="metric__label">Approval Rate</span>
+        <article class="exp__card tilt-card reveal">
+          <div class="exp__card-accent"></div>
+          <div class="exp__card-content">
+            <div class="exp__card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
             </div>
-            <div class="metric">
-              <span class="metric__value">31%</span>
-              <span class="metric__label">Cost Reduction</span>
+            <h4 class="exp__card-title">Spade Real Time</h4>
+            <p class="exp__card-desc">Architected a family of 4 services serving SMS, app, device and location features in real-time. Leveraged Reactive Kotlin with Postgres, Scylla, EFS, S3, and Kafka. Implemented Trie-based template searching to cut runtimes by 70%.</p>
+            <div class="exp__card-bullets">
+              <div class="exp__bullet"><span class="exp__bullet-value">&lt;25ms</span> P99 Latency</div>
+              <div class="exp__bullet"><span class="exp__bullet-value">10K+</span> Requests Per Second</div>
+              <div class="exp__bullet"><span class="exp__bullet-value">70%</span> Runtime Cut (Trie)</div>
             </div>
           </div>
         </article>
 
-        <!-- MLOps -->
-        <article class="exp__card reveal">
-          <div class="exp__card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
-          </div>
-          <h4 class="exp__card-title">MLOps &amp; Infrastructure</h4>
-          <p class="exp__card-desc">
-            Designed a FastAPI-based model deployment platform with MLflow integration, reducing manual effort
-            by 60%. Architected Spade Real Time — a family of 4 services serving features at sub-25ms p99 latency
-            at 10K+ RPS. Built an automated feature store with 99.99% prod-dev consistency.
-          </p>
-          <div class="exp__metrics">
-            <div class="metric">
-              <span class="metric__value">&lt;25ms</span>
-              <span class="metric__label">P99 Latency</span>
+        <article class="exp__card tilt-card reveal">
+          <div class="exp__card-accent"></div>
+          <div class="exp__card-content">
+            <div class="exp__card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
             </div>
-            <div class="metric">
-              <span class="metric__value">$18K/mo</span>
-              <span class="metric__label">AWS Savings</span>
+            <h4 class="exp__card-title">Model Deployment Platform</h4>
+            <p class="exp__card-desc">Designed a comprehensive MLOps platform with FastAPI backend, PostgreSQL, MLflow integration for model versioning. Automated pipeline switching between prod environments with JIRA &amp; Slack notifications.</p>
+            <div class="exp__card-bullets">
+              <div class="exp__bullet"><span class="exp__bullet-value">60%</span> Less Manual Effort</div>
+              <div class="exp__bullet"><span class="exp__bullet-value">99.99%</span> Feature Consistency</div>
             </div>
           </div>
         </article>
 
+        <article class="exp__card tilt-card reveal">
+          <div class="exp__card-accent"></div>
+          <div class="exp__card-content">
+            <div class="exp__card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            </div>
+            <h4 class="exp__card-title">Cost Optimization &amp; Infra</h4>
+            <p class="exp__card-desc">Built Databricks access control framework and AWS resource usage regulator. Analyzed compute patterns and built a model to recommend resource reductions. Optimized feature-selection jobs (RFE/IV/Boruta) using Ray and tensors.</p>
+            <div class="exp__card-bullets">
+              <div class="exp__bullet"><span class="exp__bullet-value">$18K/mo</span> AWS Savings</div>
+              <div class="exp__bullet"><span class="exp__bullet-value">50%+</span> Feature Store Speedup</div>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -227,49 +288,39 @@
         <div class="section__line"></div>
       </div>
       <div class="projects__grid">
-
-        <article class="project__card reveal">
-          <div class="project__card-top">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
-          </div>
+        <article class="project__card tilt-card reveal">
+          <div class="project__card-number">01</div>
           <h4 class="project__card-title">Auto Code Sequence Generator</h4>
           <p class="project__card-desc">
-            Attention model that generates production-ready code from natural language prompts and wireframe
-            diagrams. Custom token vectors support translation into React, Angular, and other frameworks.
+            Attention model generating production-ready code from natural language and wireframe diagrams.
+            Custom token vectors support multi-framework translation (React, Angular).
           </p>
           <div class="project__tags">
             <span>Attention</span><span>NLP</span><span>Code Gen</span><span>Transformers</span>
           </div>
         </article>
-
-        <article class="project__card reveal">
-          <div class="project__card-top">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-          </div>
+        <article class="project__card tilt-card reveal">
+          <div class="project__card-number">02</div>
           <h4 class="project__card-title">Visual Aid for the Blind</h4>
           <p class="project__card-desc">
-            IoT device using ESP32 + Arduino Nano that captures images over WiFi and generates real-time
-            scene descriptions using YOLOv3 and a Transformer model, trained on MS COCO.
+            IoT device using ESP32 + Arduino Nano capturing images over WiFi with real-time scene
+            descriptions via YOLOv3 and Transformer model, trained on MS COCO.
           </p>
           <div class="project__tags">
             <span>YOLOv3</span><span>Transformers</span><span>ESP32</span><span>IoT</span>
           </div>
         </article>
-
-        <article class="project__card reveal">
-          <div class="project__card-top">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-          </div>
+        <article class="project__card tilt-card reveal">
+          <div class="project__card-number">03</div>
           <h4 class="project__card-title">AI Image Caption Bot</h4>
           <p class="project__card-desc">
-            Image captioning model with 1.5M+ parameters combining LSTMs and CNNs, trained on the
-            Flickr30k dataset for automatic description generation from images.
+            Image captioning model with 1.5M+ parameters combining LSTMs and CNNs,
+            trained on Flickr30k for automatic description generation.
           </p>
           <div class="project__tags">
             <span>LSTM</span><span>CNN</span><span>Flickr30k</span><span>NLP</span>
           </div>
         </article>
-
       </div>
     </div>
   </section>
@@ -283,8 +334,7 @@
         <div class="section__line"></div>
       </div>
       <div class="research__grid">
-
-        <article class="research__card reveal">
+        <article class="research__card tilt-card reveal">
           <span class="research__label">Indian Journal of Computer Science</span>
           <h4 class="research__title">Early Detection of COVID-19 using Machine Learning</h4>
           <p class="research__desc">
@@ -292,27 +342,25 @@
             and pneumonia, achieving 99% accuracy on diagnostic imaging.
           </p>
           <div class="research__meta">
-            <span>May 2021 &ndash; July 2021</span>
+            <span>May &ndash; July 2021</span>
             <span>ResNet50 &middot; Computer Vision</span>
           </div>
         </article>
-
-        <article class="research__card reveal">
+        <article class="research__card tilt-card reveal">
           <span class="research__label">arXiv</span>
           <h4 class="research__title">Classification of Skin Cancer Images using CNNs</h4>
           <p class="research__desc">
-            CNN-based model to detect and classify skin lesions into Benign and Malignant with 86%+
-            accuracy using XceptionNet for segmentation and a custom Dense Network for classification.
+            CNN-based model to classify skin lesions into Benign and Malignant with 86%+
+            accuracy using XceptionNet for segmentation and custom Dense Network.
           </p>
           <div class="research__meta">
-            <span>Apr 2021 &ndash; May 2021</span>
+            <span>Apr &ndash; May 2021</span>
             <a href="https://arxiv.org/abs/2202.00678" target="_blank" rel="noopener" class="research__link">
               Read on arXiv
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
           </div>
         </article>
-
       </div>
     </div>
   </section>
@@ -328,31 +376,32 @@
       <div class="contact__content reveal">
         <p class="contact__text">
           I'm always open to discussing ML engineering roles, interesting projects,
-          or opportunities to collaborate. Feel free to reach out.
+          or opportunities to collaborate. Let's build something remarkable.
         </p>
-        <a href="mailto:kartikeya72001@gmail.com" class="btn btn--primary btn--lg">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          kartikeya72001@gmail.com
+        <a href="mailto:kartikeya72001@gmail.com" class="btn btn--primary btn--lg magnetic">
+          <span class="btn__text">kartikeya72001@gmail.com</span>
+          <span class="btn__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </span>
         </a>
         <div class="contact__socials">
-          <a href="https://www.linkedin.com/in/kartikeya-agarwal-119522111/" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          <a href="https://www.linkedin.com/in/kartikeya-agarwal-119522111/" target="_blank" rel="noopener" aria-label="LinkedIn" class="magnetic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
           </a>
-          <a href="https://github.com/kartikeya72001" target="_blank" rel="noopener" aria-label="GitHub">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          <a href="https://github.com/kartikeya72001" target="_blank" rel="noopener" aria-label="GitHub" class="magnetic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
           </a>
-          <a href="https://twitter.com/kartikeya72001" target="_blank" rel="noopener" aria-label="Twitter">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+          <a href="https://twitter.com/kartikeya72001" target="_blank" rel="noopener" aria-label="Twitter" class="magnetic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
           </a>
-          <a href="https://www.instagram.com/kartikeya72001/" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          <a href="https://www.instagram.com/kartikeya72001/" target="_blank" rel="noopener" aria-label="Instagram" class="magnetic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
       <p>Designed &amp; built by Kartikeya Agarwal</p>
