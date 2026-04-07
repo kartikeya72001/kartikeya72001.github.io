@@ -471,13 +471,13 @@
       setTimeout(() => { active = false; }, 600);
     }
 
+    // Desktop: type "gradient"
     document.addEventListener('keydown', (e) => {
       if (active) {
         if (e.key === 'Escape') dismiss();
         return;
       }
 
-      // Don't capture if user is typing in an input
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
       buffer += e.key.toLowerCase();
@@ -490,6 +490,36 @@
         showOverlay();
       }
     });
+
+    // Mobile: tap the KA logo 5 times rapidly
+    const logo = document.querySelector('.nav__logo');
+    if (logo) {
+      const TAP_COUNT = 5;
+      const TAP_WINDOW = 2000;
+      let taps = [];
+
+      logo.addEventListener('click', (e) => {
+        if (active) return;
+
+        const now = Date.now();
+        taps.push(now);
+        taps = taps.filter((t) => now - t < TAP_WINDOW);
+
+        if (taps.length >= TAP_COUNT) {
+          e.preventDefault();
+          taps = [];
+          showOverlay();
+        }
+      });
+    }
+
+    // Mobile: dismiss on overlay tap
+    const overlayEl = document.getElementById('eeOverlay');
+    if (overlayEl) {
+      overlayEl.addEventListener('click', (e) => {
+        if (e.target === overlayEl && active) dismiss();
+      });
+    }
   }
 
   // ─── CONSOLE GREETING ───
