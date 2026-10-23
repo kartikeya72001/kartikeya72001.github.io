@@ -197,7 +197,12 @@
   }
 
   // ─── TYPING EFFECT ───
-  const ROLES = ['Machine Learning Engineer', 'GenAI Builder', 'MLOps Architect'];
+  const ROLES = [
+    'Machine Learning Engineer 2',
+    'Applied Data Scientist',
+    'GenAI & LLM Systems Architect',
+    'Distributed Systems & MLOps'
+  ];
   const TYPE_SPEED = 70;
   const DELETE_SPEED = 35;
   const PAUSE_TYPED = 2200;
@@ -256,7 +261,7 @@
 
   // ─── STAGGER DELAYS ───
   function initStagger() {
-    const grids = document.querySelectorAll('.exp__grid, .projects__grid, .research__grid');
+    const grids = document.querySelectorAll('.exp__grid, .projects__grid, .research__grid, .education__grid');
     grids.forEach((grid) => {
       const cards = grid.querySelectorAll('.reveal');
       cards.forEach((card, i) => { card.style.transitionDelay = `${i * 120}ms`; });
@@ -395,25 +400,25 @@
     let active = false;
 
     const TRAINING_LOG = [
-      { text: '$ python gradient_descent.py', cls: 'ee-green' },
+      { text: '$ python -m navi.mle.evaluate_all', cls: 'ee-green' },
       { text: '', cls: '' },
-      { text: '>>> Initializing neural network...', cls: 'ee-dim' },
-      { text: '>>> Loading weights from kartikeya/brain-v3.2', cls: 'ee-dim' },
+      { text: '>>> Initializing distributed evaluation clusters (100 nodes)...', cls: 'ee-dim' },
+      { text: '>>> Loading weights & pipelines from kartikeya/production-v2', cls: 'ee-dim' },
       { text: '', cls: '' },
-      { text: '<span class="ee-dim">[Epoch 1/100]</span> loss: <span class="ee-red">0.847</span> lr: 3e-4', cls: '' },
-      { text: '<span class="ee-dim">[Epoch 12/100]</span> loss: <span class="ee-yellow">0.391</span> lr: 2.1e-4', cls: '' },
-      { text: '<span class="ee-dim">[Epoch 47/100]</span> loss: <span class="ee-yellow">0.084</span> lr: 8e-5', cls: '' },
-      { text: '<span class="ee-dim">[Epoch 89/100]</span> loss: <span class="ee-green">0.023</span> lr: 1e-5 <span class="ee-green">&#10003;</span>', cls: '' },
+      { text: '<span class="ee-dim">[Step 1/10]</span> Cobb-Douglas Submodular intake: <span class="ee-green">105K+ templates/wk</span>', cls: '' },
+      { text: '<span class="ee-dim">[Step 3/10]</span> Population reach across 226M SMS: <span class="ee-green">91.3% coverage</span> (+85.5% gain)', cls: '' },
+      { text: '<span class="ee-dim">[Step 6/10]</span> 10-Task Databricks LLM DAG (Terra/JEV): <span class="ee-green">87.7% accuracy</span> (Tier-1: 99.0%)', cls: '' },
+      { text: '<span class="ee-dim">[Step 8/10]</span> Flat-Array CSR Trie (Scala, 8.39M templates): <span class="ee-green">5.08x speedup</span> (-80.3% latency)', cls: '' },
+      { text: '<span class="ee-dim">[Step 10/10]</span> Ray distributed tensor feature selection: <span class="ee-green">80% compute slashed</span>', cls: '' },
       { text: '', cls: '' },
-      { text: '>>> Model converged. Evaluating metrics...', cls: 'ee-dim' },
+      { text: '>>> Production systems verified. Quantified business impact:', cls: 'ee-dim' },
       { text: '', cls: '' },
-      { text: '<span class="ee-accent">[PrismV6]</span>     approval_rate  <span class="ee-green">+= 150bps</span>', cls: '' },
-      { text: '<span class="ee-accent">[LLaMA-3]</span>     QLoRA fine-tune <span class="ee-green">complete</span>  TAT <span class="ee-green">-36h</span>', cls: '' },
-      { text: '<span class="ee-accent">[Spade-RT]</span>    p99_latency    <span class="ee-green">&lt;20ms</span> @ 10K rps', cls: '' },
-      { text: '<span class="ee-accent">[FeatureStore]</span> consistency    <span class="ee-green">99.99%</span>  speedup <span class="ee-green">2x</span>', cls: '' },
-      { text: '<span class="ee-accent">[AWS]</span>          yearly_savings <span class="ee-green">$250,000+</span>', cls: '' },
+      { text: '<span class="ee-accent">[Underwriting]</span>  disbursal_uplift      <span class="ee-green">&#8377;180 Cr ($21M+)</span>', cls: '' },
+      { text: '<span class="ee-accent">[Prism Score]</span>  credit_approval_rate  <span class="ee-green">+150 bps</span>', cls: '' },
+      { text: '<span class="ee-accent">[Spade-RT]</span>     p99_serving_latency   <span class="ee-green">&lt;20ms</span> @ 10,000+ RPS', cls: '' },
+      { text: '<span class="ee-accent">[Databricks]</span>   annual_aws_savings    <span class="ee-green">$250,000+</span>', cls: '' },
       { text: '', cls: '' },
-      { text: '<span class="ee-white">>>> All metrics converged. Global minimum reached.</span>', cls: 'ee-line--result' },
+      { text: '<span class="ee-white">>>> All systems operational. Zero drift detected.</span>', cls: 'ee-line--result' },
       { text: '<span class="ee-dim">>>></span> <span class="ee-white">Kartikeya was here.</span> <span class="ee-cursor-blink">_</span>', cls: '' },
     ];
 

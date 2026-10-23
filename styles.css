@@ -963,6 +963,93 @@ button { cursor: none; }
 .research__link:hover { gap: 10px; }
 
 /* ================================================
+   EDUCATION & HONORS
+   ================================================ */
+.education__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+.education__card {
+  position: relative;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(129, 140, 248, 0.04), rgba(255, 255, 255, 0.01));
+  overflow: hidden;
+  padding: 44px;
+  transition: all 0.5s var(--ease-out);
+}
+.education__card:hover {
+  border-color: rgba(129, 140, 248, 0.3);
+  box-shadow: 0 0 60px var(--accent-glow), 0 20px 60px rgba(0,0,0,0.3);
+}
+.education__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.education__institution {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.education__degree {
+  font-size: 1.05rem;
+  color: var(--accent-bright);
+  font-weight: 600;
+}
+.education__meta {
+  text-align: right;
+  font-size: 0.9375rem;
+  color: var(--text-dim);
+}
+.education__highlights {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+.education__item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.education__item-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--accent-glow);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s var(--ease-out);
+}
+.education__card:hover .education__item-icon {
+  background: var(--accent-glow-strong);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+.education__item-content h5 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.education__item-content p {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ================================================
    CONTACT
    ================================================ */
 .contact { text-align: center; }
@@ -1171,6 +1258,9 @@ button { cursor: none; }
   .exp__featured-metrics { grid-template-columns: repeat(2, 1fr); }
   .projects__grid { grid-template-columns: 1fr; }
   .research__grid { grid-template-columns: 1fr; }
+  .education__card { padding: 28px; }
+  .education__highlights { grid-template-columns: 1fr; }
+  .education__meta { text-align: left; }
 
   .hero__scroll-indicator { display: none; }
 }
